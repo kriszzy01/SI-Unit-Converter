@@ -1,0 +1,11 @@
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 56px);
+    gap: 10px 5px;
+}
+
+@media screen and (max-height: 600px) {
+    .keypad {
+        grid-template-columns: repeat(4, 40px);
+    }
+}

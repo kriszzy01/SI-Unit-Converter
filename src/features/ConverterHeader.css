@@ -1,0 +1,17 @@
+header {
+    width: 100%;
+}
+
+nav {
+    margin: 30px auto 15px auto;
+}
+
+header a {
+    margin: 5px;
+    padding: 5px;
+}
+
+.active {
+    border: 1px solid white;
+    border-radius: 20px;
+} 
