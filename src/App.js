@@ -13,12 +13,11 @@ export const App = () => {
         <Router>
             <ConverterHeader/>
             <Switch>
-                <Route exact path="/"><AreaConverter/></Route>
+                <Route exact path="/" render={()=>AreaConverter}/>
                 <Route path="/length"><LengthConverter/></Route>
                 <Route path="/volume"><VolumeConverter/></Route>
                 <Route path="/data"><DataConverter/></Route>
                 <Route path="/mass"><MassConverter/></Route>
-                <Route component={AreaConverter}/>
             </Switch>
         </Router>
     );
