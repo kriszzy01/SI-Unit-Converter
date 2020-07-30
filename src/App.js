@@ -14,7 +14,7 @@ export const App = () => {
             <ConverterHeader />
             <Switch>
                 <Route
-                    exact path="/"
+                    exact path="/area"
                     render={() => AreaConverter}
                 />
                 <Route path="/length"><LengthConverter /></Route>
