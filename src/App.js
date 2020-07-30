@@ -18,6 +18,7 @@ export const App = () => {
                 <Route path="/volume"><VolumeConverter/></Route>
                 <Route path="/data"><DataConverter/></Route>
                 <Route path="/mass"><MassConverter/></Route>
+                <Route component={AreaConverter}/>
             </Switch>
         </Router>
     );
