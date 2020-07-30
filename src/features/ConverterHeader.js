@@ -7,11 +7,11 @@ export const ConverterHeader = () => {
         <header>
             <h1>Unit Converter</h1>
             <nav>
-                <NavLink exact to="/" activeClassName="active">Area</NavLink>
-                <NavLink to="length">Length</NavLink>
-                <NavLink to="data">Data</NavLink>
-                <NavLink to="volume">Volume</NavLink>
-                <NavLink to="mass">Mass</NavLink>
+                <NavLink exact to="/area" activeClassName="active">Area</NavLink>
+                <NavLink to="/length">Length</NavLink>
+                <NavLink to="/data">Data</NavLink>
+                <NavLink to="/volume">Volume</NavLink>
+                <NavLink to="/mass">Mass</NavLink>
             </nav>
         </header>
     );
