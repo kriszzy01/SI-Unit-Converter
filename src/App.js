@@ -13,7 +13,7 @@ export const App = () => {
         <Router>
             <ConverterHeader/>
             <Switch>
-                <Route path="/area"><AreaConverter/></Route>
+                <Route exact path="/SI-Unit-Converter"><AreaConverter/></Route>
                 <Route path="/length"><LengthConverter/></Route>
                 <Route path="/volume"><VolumeConverter/></Route>
                 <Route path="/data"><DataConverter/></Route>

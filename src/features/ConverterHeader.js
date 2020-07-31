@@ -7,7 +7,7 @@ export const ConverterHeader = () => {
         <header>
             <h1>Unit Converter</h1>
             <nav>
-                <NavLink to="/area" activeClassName="active">Area</NavLink>
+                <NavLink to="/SI-Unit-Converter" activeClassName="active">Area</NavLink>
                 <NavLink to="/length">Length</NavLink>
                 <NavLink to="/data">Data</NavLink>
                 <NavLink to="/volume">Volume</NavLink>
