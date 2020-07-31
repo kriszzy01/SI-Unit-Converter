@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { selectUnitById, selectAllUnits} from "./areaSlice";
-import {scaleChanged} from "../../keypad/keypadSlice";
+import { selectUnitById, selectAllUnits } from "./areaSlice";
+import { scaleChanged, initialiseKeyBoard } from "../../keypad/keypadSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { ConverterKeypad } from "../../keypad/ConverterKeypad";
 import "../converters.css";
@@ -17,28 +17,32 @@ export const AreaConverter = () => {
 
     const handleToScale1 = () => {
         dispatch(scaleChanged());
+        dispatch(initialiseKeyBoard("active"));
         setIsInput1(true);
         setToScale(scale2);
     };
 
     const handleToScale2 = () => {
         dispatch(scaleChanged());
+        dispatch(initialiseKeyBoard("active"));
         setIsInput1(false);
         setToScale(scale1);
     };
 
     let firstFormula = useSelector(state => selectUnitById(state, scale1)).formulas[toScale];
-    
+
     let secondFormula = useSelector(state => selectUnitById(state, scale2)).formulas[toScale];
-    
+
     const submitFormula1 = event => {
-        setScale1(event.target.value);
         dispatch(scaleChanged());
+        dispatch(initialiseKeyBoard("idle"));
+        setScale1(event.target.value);
     };
 
     const submitFormula2 = event => {
-        setScale2(event.target.value);
         dispatch(scaleChanged());
+        dispatch(initialiseKeyBoard("idle"));
+        setScale2(event.target.value);
     };
 
     const tryConvert = (number, operator, constant) => {
@@ -46,7 +50,7 @@ export const AreaConverter = () => {
 
         if (Number.isNaN(input)) return "";
 
-        return operator === "*" ? number * constant: number / constant;
+        return operator === "*" ? number * constant : number / constant;
     };
 
     const value2 = isInput1 === false ? value : tryConvert(value, firstFormula.operator, firstFormula.constant);
@@ -56,45 +60,47 @@ export const AreaConverter = () => {
     const allUnits = useSelector(selectAllUnits);
 
     const units = allUnits.map(unit => {
-        const {id} = unit;
+        const { id } = unit;
 
         return <option value={id} key={id}>{id.replace(id.charAt(0), id.charAt(0).toUpperCase())}</option>;
     });
 
+    const keypadStatus = useSelector(state => state.keypad.keyboardStatus);
+
     return (
 
         <main>
-            <section className="firstInput">
+            <section className={keypadStatus === "active" && isInput1 === true ? "firstInput selected":"firstInput"}>
                 <select onChange={submitFormula1}> {units} </select>
 
                 <textarea
                     type="text"
                     readOnly
-                    value={value2 <= 0 ? "": value1}
-                    placeholder={isInput1 === true ? 
-                        `I'm ready! Use the keypad `: 
+                    value={value2 <= 0 ? "" : value1}
+                    placeholder={keypadStatus === "active" && isInput1 === true ?
+                        `I'm ready! Use the keypad ` :
                         `Click me to Enter Value in ${scale1.replace(scale1.charAt(0), scale1.charAt(0).toUpperCase())}`}
-        
+
                     onClick={handleToScale1}
                 />
             </section>
 
-            <section className="secondInput">
+            <section className={keypadStatus === "active" && isInput1 === false ? "secondInput selected":"secondInput"}>
                 <select onChange={submitFormula2}> {units} </select>
-                
+
                 <textarea
                     type="text"
                     readOnly
-                    value={value1 <= 0 ? "": value2}
-                    placeholder={isInput1 === false ? 
-                        `I'm ready! Use the keypad `: 
+                    value={value1 <= 0 ? "" : value2}
+                    placeholder={keypadStatus === "active" && isInput1 === false?
+                        `I'm ready! Use the keypad ` :
                         `Click me to Enter Value in ${scale1.replace(scale1.charAt(0), scale1.charAt(0).toUpperCase())}`}
-                    
+
                     onClick={handleToScale2}
                 />
             </section>
 
-            <ConverterKeypad/>
+            <ConverterKeypad />
         </main>
     );
 };

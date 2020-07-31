@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    value: []
+    value: [],
+    keyboardStatus: "idle"
 };
 
 const keypadSlice = createSlice({
@@ -11,7 +12,9 @@ const keypadSlice = createSlice({
         keypadClicked: {
             reducer(state, action) {
                 const {keyValue} = action.payload;
-
+                if (state.keyboardStatus === "idle") {
+                    return
+                }
                 if (keyValue === "") {
                     return;
                 } else if (keyValue === "<=") {
@@ -35,10 +38,20 @@ const keypadSlice = createSlice({
 
                 state.value=[];
             }
+        },
+        initialiseKeyBoard: {
+            reducer(state, action) {
+                state.keyboardStatus = action.payload;
+            },
+            prepare(status) {
+                return {
+                    payload: status
+                }
+            }
         }
     }
 })
 
 export default keypadSlice.reducer;
 
-export const {keypadClicked, scaleChanged} = keypadSlice.actions;
+export const {keypadClicked, scaleChanged, initialiseKeyBoard} = keypadSlice.actions;
