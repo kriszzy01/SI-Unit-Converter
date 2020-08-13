@@ -94,7 +94,7 @@ export const MassConverter = () => {
                     value={value1 <= 0 ? "" : value2}
                     placeholder={keypadStatus === "active" && isInput1 === false?
                         `I'm ready! Use the keypad ` :
-                        `Click me to Enter Value in ${scale1.replace(scale1.charAt(0), scale1.charAt(0).toUpperCase())}`}
+                        `Click me to Enter Value in ${scale2.replace(scale2.charAt(0), scale2.charAt(0).toUpperCase())}`}
 
                     onClick={handleToScale2}
                 />
